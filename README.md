@@ -1,14 +1,15 @@
 <img src="https://raw.githubusercontent.com/BEPb/BEPb/5c63fa170d1cbbb0b1974f05a3dbe6aca3f5b7f3/assets/Bottom_up.svg" width="100%" />
 <h1 align="center">Hello 👋, I'm Fauzan Amaan Mohammed</h1>
 <h3 align="center">Software Developer</h3>
-- 🔭 I’m currently working on **Internal Collaboration App**
+- 🔭 I’m recently finished working on Internal Collaboration App
 
 
 
 <div> <a href="https://twitter.com/xxfoozi" target="_blank"><img src="https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white" target="_blank"></a>
 <a href="https://github.com/fauzanamaan" target="_blank"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" target="_blank"></a>
 <a href="https://instagram.com/xxfoozi" target="_blank"><img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white" target="_blank"></a>
-</div><h3 align="left">Connect with me:</h3>
+</div><h3 align
+="left">Connect with me:</h3>
 <p align="left">
 <a href="https://codesandbox.com/fauzanamaan" target="blank"><img align="center" src="https://raw.githubusercontent.com/teamedwardforever/Readme-Generator/71f25dd8b98329b168142a6b782a107b75eab178/svg/Social/codesandbox.svg" alt="fauzanamaan" height="30" width="40" /></a><a href="https://twitter.com/xxfoozi" target="blank"><img align="center" src="https://raw.githubusercontent.com/teamedwardforever/Readme-Generator/71f25dd8b98329b168142a6b782a107b75eab178/svg/Social/twitter.svg" alt="xxfoozi" height="30" width="40" /></a><a href="https://www.youtube.com/c/foozi" target="blank"><img align="center" src="https://raw.githubusercontent.com/teamedwardforever/Readme-Generator/71f25dd8b98329b168142a6b782a107b75eab178/svg/Social/youtube.svg" alt="foozi" height="30" width="40" /></a><a href="https://codepen.io/fauzanamaan" target="blank"><img align="center" src="https://raw.githubusercontent.com/teamedwardforever/Readme-Generator/71f25dd8b98329b168142a6b782a107b75eab178/svg/Social/codepen.svg" alt="fauzanamaan" height="30" width="40" /></a><a href="https://instagram.com/xxfoozi" target="blank"><img align="center" src="https://raw.githubusercontent.com/teamedwardforever/Readme-Generator/71f25dd8b98329b168142a6b782a107b75eab178/svg/Social/instagram.svg" alt="xxfoozi" height="30" width="40" /></a><a href="https://www.behance.net/fauzanamaanm" target="blank"><img align="center" src="https://raw.githubusercontent.com/teamedwardforever/Readme-Generator/71f25dd8b98329b168142a6b782a107b75eab178/svg/Social/behance.svg" alt="fauzanamaanm" height="30" width="40" /></a></p>
 
