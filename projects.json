@@ -1,0 +1,26 @@
+[
+  {
+    "name": "MenuIQ",
+    "blurb": "Menu price intelligence for independent restaurants. Senior capstone, I own the backend.",
+    "status": "active",
+    "stack": [
+      "Python",
+      "FastAPI",
+      "PostgreSQL",
+      "pgvector",
+      "Docker"
+    ],
+    "private": true
+  },
+  {
+    "name": "socket-project",
+    "blurb": "Distributed hash table built on raw sockets, with a manager and peers. CSE 434 networks project.",
+    "status": "active",
+    "stack": [
+      "Python",
+      "Sockets",
+      "DHT"
+    ],
+    "private": true
+  }
+]
