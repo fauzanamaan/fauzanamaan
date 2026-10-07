@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="./assets/robot-arm.svg" width="460" alt="ASCII robot arm stacking letter blocks that spell FAUZAN" />
+</p>
+
 ## Currently building
 
 <!-- PROJECTS:START -->
