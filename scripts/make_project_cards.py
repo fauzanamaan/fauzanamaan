@@ -231,17 +231,34 @@ def render_card(project, index):
 
 
 def build_readme_block(entries):
-    # entries is a list of (svg_path, url, name)
+    # entries is a list of (svg_path, url, name).
+    # Plain images instead of a table, so GitHub draws no cell borders.
     rows = []
     for i in range(0, len(entries), CARDS_PER_ROW):
         cells = []
         for path, url, name in entries[i : i + CARDS_PER_ROW]:
-            img = f'<img src="./{path}" width="{WIDTH}" alt="{escape(name)}" />'
+            img = f'<img src="./{path}" width="49%" alt="{escape(name)}" />'
             if url:
                 img = f'<a href="{url}">{img}</a>'
-            cells.append(f'    <td valign="top">{img}</td>')
-        rows.append("  <tr>\n" + "\n".join(cells) + "\n  </tr>")
-    return "<table>\n" + "\n".join(rows) + "\n</table>"
+            cells.append(f"  {img}")
+        rows.append("\n".join(cells))
+    header = '  <img src="./assets/section-building.svg" width="100%" alt="Currently building" />'
+    body = "\n  <br />\n".join(rows)
+    return f'<p align="center">\n{header}\n  <br />\n{body}\n</p>'
+
+
+def render_section_header(count):
+    # A label strip in the same style as the other section headers
+    w, h = 860, 40
+    label = f'font-family="{FONT}" font-size="10" fill="{MUTED}" letter-spacing="1.5"'
+    return (
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}" '
+        f'role="img" aria-label="Currently building">'
+        f'<text x="28" y="24" {label}>CURRENTLY BUILDING // ARM-01</text>'
+        f'<text x="{w - 28}" y="24" text-anchor="end" {label}>{count:02d} PROJECTS</text>'
+        f'<line x1="28" y1="36" x2="{w - 28}" y2="36" stroke="{BORDER}"/>'
+        f"</svg>"
+    )
 
 
 def update_readme(block):
@@ -277,6 +294,11 @@ def main():
         out.write_text(svg, encoding="utf-8")
         entries.append((f"cards/{slug}.svg", repo_url(project.get("repo")), project["name"]))
         print(f"wrote {out.relative_to(ROOT)}")
+
+    assets = ROOT / "assets"
+    assets.mkdir(exist_ok=True)
+    (assets / "section-building.svg").write_text(render_section_header(len(entries)), encoding="utf-8")
+    print("wrote assets/section-building.svg")
 
     update_readme(build_readme_block(entries))
     print(f"updated README.md with {len(entries)} project(s)")

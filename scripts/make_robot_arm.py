@@ -19,7 +19,12 @@ OUT = ROOT / "assets" / "robot-arm.svg"
 NAME = "FAUZAN"
 PHRASES = ["BUILDS ROBOTS", "TRAINS MODELS", "WRANGLES DATA"]
 
-# Canvas
+# Outer canvas, the same width and frame as the other sections
+CANVAS_W = 860
+HEADER_H = 44
+SCENE_SCALE = 1.15
+
+# The scene the arm works in, before scaling
 WIDTH = 460
 HEIGHT = 312
 
@@ -246,21 +251,42 @@ def render():
     total = tl.t
     dur = f'dur="{total:.2f}s" repeatCount="indefinite"'
 
+    canvas_h = round(HEADER_H + HEIGHT * SCENE_SCALE)
+    scene_x = round((CANVAS_W - WIDTH * SCENE_SCALE) / 2)
+
     parts = []
     parts.append(
-        f'<svg xmlns="http://www.w3.org/2000/svg" width="{WIDTH}" height="{HEIGHT}" '
-        f'viewBox="0 0 {WIDTH} {HEIGHT}" role="img" '
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{CANVAS_W}" height="{canvas_h}" '
+        f'viewBox="0 0 {CANVAS_W} {canvas_h}" role="img" '
         f'aria-label="ASCII robot arm stacking letter blocks that spell {NAME}">'
     )
     parts.append(
         f"<style>text {{ font-family: {FONT}; font-size: 12px; }} "
         f".b {{ font-weight: 700; text-anchor: middle; }}</style>"
     )
-    parts.append(f'<rect width="{WIDTH}" height="{HEIGHT}" rx="10" fill="{BG}"/>')
+    # Frame, corner brackets and header strip, matching the info panel
+    w, h, m, s = CANVAS_W, canvas_h, 10, 14
+    parts.append(f'<rect width="{w}" height="{h}" rx="10" fill="{BG}"/>')
     parts.append(
-        f'<rect x="1" y="1" width="{WIDTH - 2}" height="{HEIGHT - 2}" rx="9" '
+        f'<rect x="1" y="1" width="{w - 2}" height="{h - 2}" rx="9" '
         f'fill="none" stroke="{BORDER}" stroke-width="1.5"/>'
     )
+    corners = (
+        f"M{m} {m + s} V{m} H{m + s} M{w - m - s} {m} H{w - m} V{m + s} "
+        f"M{w - m} {h - m - s} V{h - m} H{w - m - s} M{m + s} {h - m} H{m} V{h - m - s}"
+    )
+    parts.append(f'<path d="{corners}" fill="none" stroke="{ACCENT}" stroke-width="1.5" opacity="0.7"/>')
+    label = f'font-size="10" fill="{MUTED}" letter-spacing="1.5"'
+    parts.append(f'<text x="28" y="32" {label}>WORKCELL // ARM-01</text>')
+    parts.append(
+        f'<circle cx="{w - 28 - 68}" cy="28" r="4" fill="{ACCENT}">'
+        f'<animate attributeName="opacity" values="1;0.3;1" dur="1.8s" repeatCount="indefinite"/></circle>'
+    )
+    parts.append(f'<text x="{w - 28}" y="32" text-anchor="end" {label}>RUNNING</text>')
+    parts.append(f'<line x1="28" y1="44" x2="{w - 28}" y2="44" stroke="{BORDER}"/>')
+
+    # Everything below is drawn in scene coordinates, then scaled and centered
+    parts.append(f'<g transform="translate({scene_x},{HEADER_H}) scale({SCENE_SCALE})">')
 
     # Shelf and floor, drawn with characters
     shelf_w = MAX_SLOTS * SLOT_PITCH + 10
@@ -340,6 +366,7 @@ def render():
         )
 
     parts.append("</g></g></g></g></g></g>")
+    parts.append("</g>")
     parts.append("</svg>")
     return "\n".join(parts), total
 

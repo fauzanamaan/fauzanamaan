@@ -228,20 +228,20 @@ def render_panel():
 
 
 def render_linkedin():
-    # A plain text button, the README wraps it in the profile link
-    w, h = 250, 40
-    label = f"LinkedIn  /in/{LINKEDIN_USER}"
+    # A full width strip in the same frame style, the README wraps it in the profile link
+    w, h = WIDTH, 48
     return "\n".join([
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}" '
         f'role="img" aria-label="LinkedIn profile">',
-        f"<style>text {{ font-family: {FONT}; font-size: 13px; }}</style>",
-        f'<rect width="{w}" height="{h}" rx="20" fill="{BG}"/>',
-        f'<rect x="1" y="1" width="{w - 2}" height="{h - 2}" rx="19" fill="none" stroke="{BLUE}" '
-        f'stroke-width="1.5" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1">'
-        f'<animate attributeName="stroke-dashoffset" from="1" to="0" dur="1.2s" fill="freeze"/></rect>',
-        f'<text x="20" y="25" fill="{TEXT}">{escape(label)}</text>',
-        f'<text x="{w - 34}" y="25" fill="{BLUE}">-&gt;'
-        f'<animateTransform attributeName="transform" type="translate" values="0,0;5,0;0,0" '
+        STYLE,
+        f'<rect width="{w}" height="{h}" rx="10" fill="{BG}"/>',
+        f'<rect x="1" y="1" width="{w - 2}" height="{h - 2}" rx="9" fill="none" stroke="{BORDER}" '
+        f'stroke-width="1.5"/>',
+        f'<text class="label" x="{PAD}" y="28">LINKS</text>',
+        f'<text class="value" x="{PAD + 80}" y="29">'
+        f'<tspan fill="{BLUE}">LinkedIn</tspan>  /in/{escape(LINKEDIN_USER)}</text>',
+        f'<text class="value" x="{w - PAD - 16}" y="29" fill="{BLUE}" style="fill:{BLUE}">-&gt;'
+        f'<animateTransform attributeName="transform" type="translate" values="0,0;6,0;0,0" '
         f'dur="1.4s" repeatCount="indefinite"/></text>',
         "</svg>",
     ])

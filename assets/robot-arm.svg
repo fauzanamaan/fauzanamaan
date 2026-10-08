@@ -1,7 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="460" height="312" viewBox="0 0 460 312" role="img" aria-label="ASCII robot arm stacking letter blocks that spell FAUZAN">
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="403" viewBox="0 0 860 403" role="img" aria-label="ASCII robot arm stacking letter blocks that spell FAUZAN">
 <style>text { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12px; } .b { font-weight: 700; text-anchor: middle; }</style>
-<rect width="460" height="312" rx="10" fill="#0d1117"/>
-<rect x="1" y="1" width="458" height="310" rx="9" fill="none" stroke="#30363d" stroke-width="1.5"/>
+<rect width="860" height="403" rx="10" fill="#0d1117"/>
+<rect x="1" y="1" width="858" height="401" rx="9" fill="none" stroke="#30363d" stroke-width="1.5"/>
+<path d="M10 24 V10 H24 M836 10 H850 V24 M850 379 V393 H836 M24 393 H10 V379" fill="none" stroke="#39d353" stroke-width="1.5" opacity="0.7"/>
+<text x="28" y="32" font-size="10" fill="#8b949e" letter-spacing="1.5">WORKCELL // ARM-01</text>
+<circle cx="764" cy="28" r="4" fill="#39d353"><animate attributeName="opacity" values="1;0.3;1" dur="1.8s" repeatCount="indefinite"/></circle>
+<text x="832" y="32" text-anchor="end" font-size="10" fill="#8b949e" letter-spacing="1.5">RUNNING</text>
+<line x1="28" y1="44" x2="832" y2="44" stroke="#30363d"/>
+<g transform="translate(166,44) scale(1.15)">
 <text x="18.0" y="217" fill="#8b949e" textLength="424" lengthAdjust="spacingAndGlyphs">============================================================</text>
 <text x="14" y="300" fill="#30363d" textLength="432" lengthAdjust="spacingAndGlyphs">______________________________________________________________</text>
 <text x="422" y="30" fill="#8b949e" text-anchor="middle" font-size="10">FEED</text>
@@ -127,4 +133,5 @@
 <g transform="translate(0,20)" opacity="0"><animate attributeName="opacity" dur="58.26s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.89821;0.90285" values="0;1;0"/><rect x="-10.5" y="-10.5" width="21" height="21" rx="4" fill="#e5484d"/><rect x="-9.0" y="-9.0" width="18" height="18" rx="2.5" fill="#f4ecd8"/><text class="b" y="4.5" font-size="13" fill="#e5484d">T</text></g>
 <g transform="translate(0,20)" opacity="0"><animate attributeName="opacity" dur="58.26s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.90748;0.91212" values="0;1;0"/><rect x="-10.5" y="-10.5" width="21" height="21" rx="4" fill="#2f9e5b"/><rect x="-9.0" y="-9.0" width="18" height="18" rx="2.5" fill="#f4ecd8"/><text class="b" y="4.5" font-size="13" fill="#2f9e5b">A</text></g>
 </g></g></g></g></g></g>
+</g>
 </svg>
