@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="250" height="40" viewBox="0 0 250 40" role="img" aria-label="LinkedIn profile">
+<style>text { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13px; }</style>
+<rect width="250" height="40" rx="20" fill="#0d1117"/>
+<rect x="1" y="1" width="248" height="38" rx="19" fill="none" stroke="#58a6ff" stroke-width="1.5" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"><animate attributeName="stroke-dashoffset" from="1" to="0" dur="1.2s" fill="freeze"/></rect>
+<text x="20" y="25" fill="#c9d1d9">LinkedIn  /in/fauzanamaan</text>
+<text x="216" y="25" fill="#58a6ff">-&gt;<animateTransform attributeName="transform" type="translate" values="0,0;5,0;0,0" dur="1.4s" repeatCount="indefinite"/></text>
+</svg>
