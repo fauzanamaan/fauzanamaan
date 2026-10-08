@@ -7,11 +7,20 @@ Run from the repo root:
     python scripts/make_info_panel.py
 """
 
+import re
 from pathlib import Path
 from xml.sax.saxutils import escape
 
 ROOT = Path(__file__).resolve().parent.parent
 ASSETS = ROOT / "assets"
+README = ROOT / "README.md"
+
+START_MARK = "<!-- LINKS:START -->"
+END_MARK = "<!-- LINKS:END -->"
+
+# Button size in px
+BTN_W = 250
+BTN_H = 38
 
 # Content
 NAME = "FAUZAN AMAAN MOHAMMED"
@@ -26,7 +35,12 @@ FOCUS = [
     "Robotics and Manufacturing",
 ]
 LOCATIONS = ["Dubai, UAE", "Tempe, AZ, US", "Kochi, Kerala, India"]
-LINKEDIN_USER = "fauzanamaan"
+
+# Buttons shown under the panel: (label, short text, link). Add more rows here.
+LINKS = [
+    ("LinkedIn", "/in/fauzanamaan", "https://www.linkedin.com/in/fauzanamaan"),
+    ("Repos", "/fauzanamaan", "https://github.com/fauzanamaan?tab=repositories"),
+]
 
 # Canvas
 WIDTH = 860
@@ -227,32 +241,62 @@ def render_panel():
     return "\n".join(parts)
 
 
-def render_linkedin():
-    # A full width strip in the same frame style, the README wraps it in the profile link
-    w, h = WIDTH, 48
+def render_button(label, text):
+    # A small pill button, the README wraps it in its link
+    w, h = BTN_W, BTN_H
     return "\n".join([
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}" '
-        f'role="img" aria-label="LinkedIn profile">',
-        STYLE,
-        f'<rect width="{w}" height="{h}" rx="10" fill="{BG}"/>',
-        f'<rect x="1" y="1" width="{w - 2}" height="{h - 2}" rx="9" fill="none" stroke="{BORDER}" '
-        f'stroke-width="1.5"/>',
-        f'<text class="label" x="{PAD}" y="28">LINKS</text>',
-        f'<text class="value" x="{PAD + 80}" y="29">'
-        f'<tspan fill="{BLUE}">LinkedIn</tspan>  /in/{escape(LINKEDIN_USER)}</text>',
-        f'<text class="value" x="{w - PAD - 16}" y="29" fill="{BLUE}" style="fill:{BLUE}">-&gt;'
-        f'<animateTransform attributeName="transform" type="translate" values="0,0;6,0;0,0" '
+        f'role="img" aria-label="{escape(label)}">',
+        f"<style>text {{ font-family: {FONT}; font-size: 13px; }}</style>",
+        f'<rect width="{w}" height="{h}" rx="{h / 2}" fill="{BG}"/>',
+        f'<rect x="1" y="1" width="{w - 2}" height="{h - 2}" rx="{h / 2 - 1}" fill="none" '
+        f'stroke="{BORDER}" stroke-width="1.5"/>',
+        f'<text x="18" y="24"><tspan fill="{BLUE}">{escape(label)}</tspan>'
+        f'<tspan fill="{TEXT}"> {escape(text)}</tspan></text>',
+        f'<text x="{w - 34}" y="24" fill="{BLUE}">-&gt;'
+        f'<animateTransform attributeName="transform" type="translate" values="0,0;5,0;0,0" '
         f'dur="1.4s" repeatCount="indefinite"/></text>',
         "</svg>",
     ])
 
 
+def slugify(label):
+    return re.sub(r"[^a-z0-9]+", "-", label.lower()).strip("-")
+
+
+def update_readme(files):
+    # Rewrite the row of buttons between the LINKS markers
+    text = README.read_text(encoding="utf-8")
+    if START_MARK not in text or END_MARK not in text:
+        raise SystemExit(f"README.md is missing {START_MARK} / {END_MARK}")
+    lines = []
+    for (label, _, url), name in zip(LINKS, files):
+        lines.append(
+            f'  <a href="{url}"><img src="./assets/{name}" width="{BTN_W}" alt="{escape(label)}" /></a>'
+        )
+    block = '<p align="center">\n' + "\n".join(lines) + "\n</p>"
+    pattern = re.compile(re.escape(START_MARK) + r".*?" + re.escape(END_MARK), re.DOTALL)
+    README.write_text(pattern.sub(f"{START_MARK}\n{block}\n{END_MARK}", text), encoding="utf-8")
+
+
 def main():
     ASSETS.mkdir(exist_ok=True)
     (ASSETS / "info-panel.svg").write_text(render_panel(), encoding="utf-8")
-    (ASSETS / "linkedin.svg").write_text(render_linkedin(), encoding="utf-8")
     print("wrote assets/info-panel.svg")
-    print("wrote assets/linkedin.svg")
+
+    # Clear old buttons so removed links do not leave stale files
+    for old in list(ASSETS.glob("btn-*.svg")) + [ASSETS / "linkedin.svg"]:
+        if old.exists():
+            old.unlink()
+
+    files = []
+    for label, text, _ in LINKS:
+        name = f"btn-{slugify(label)}.svg"
+        (ASSETS / name).write_text(render_button(label, text), encoding="utf-8")
+        files.append(name)
+        print(f"wrote assets/{name}")
+    update_readme(files)
+    print(f"updated README.md with {len(files)} button(s)")
 
 
 if __name__ == "__main__":
